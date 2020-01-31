@@ -95,6 +95,9 @@
         myIP = [[[RTBMyIP sharedInstance] ipsForInterfaces] objectForKey:@"en1"];
     }
 #endif
+    if (!myIP) {
+        myIP = @"127.0.0.1";
+    }
     
     return myIP;
 }
@@ -388,8 +391,9 @@
 }
 
 - (void)startWebServer {
-    NSDictionary *ips = [[RTBMyIP sharedInstance] ipsForInterfaces];
-    BOOL isConnectedThroughWifi = [ips objectForKey:@"en0"] != nil;
+//    NSDictionary *ips = [[RTBMyIP sharedInstance] ipsForInterfaces];
+//    BOOL isConnectedThroughWifi = [ips objectForKey:@"en0"] != nil;
+    BOOL isConnectedThroughWifi = YES;
     
     if(isConnectedThroughWifi || TARGET_IPHONE_SIMULATOR) {
         
