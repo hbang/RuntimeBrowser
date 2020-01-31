@@ -1,0 +1,10 @@
+Package: ws.hbang.runtimebrowser
+Name: RuntimeBrowser
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Class browser for Objective-C runtime
+Maintainer: HASHBANG Productions <support@hbang.ws>
+Author: HASHBANG Productions <support@hbang.ws>
+Section: Utilities
+Icon: https://repo.chariz.com/package/ws.hbang.runtimebrowser/icon@3x.png
+Depiction: https://repo.chariz.com/package/ws.hbang.runtimebrowser/
