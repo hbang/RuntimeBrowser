@@ -258,7 +258,7 @@
     NSString *image = nil;
     if(imageNameC) {
         image = [NSString stringWithCString:imageNameC encoding:NSUTF8StringEncoding];
-    } else {
+    } else if (![className hasPrefix:@"NSKVONotifying_"]) {
         NSLog(@"-- [ERROR] cannot find image for class %@", className);
         //image = [[NSBundle bundleForClass:klass] bundlePath];
     }
