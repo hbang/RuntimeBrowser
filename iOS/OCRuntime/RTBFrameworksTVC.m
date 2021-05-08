@@ -324,9 +324,15 @@ static const NSUInteger kPrivateFrameworks = 1;
     self.allClasses = [RTBRuntime sharedInstance];
     
     self.bundleFrameworks = [self loadedBundleFrameworks];
+
+    NSComparator sortComparator = ^NSComparisonResult (NSBundle *a, NSBundle *b) {
+        NSString *firstName = [[[a bundlePath] lastPathComponent] stringByDeletingPathExtension];
+        NSString *secondName = [[[b bundlePath] lastPathComponent] stringByDeletingPathExtension];
+        return [firstName caseInsensitiveCompare:secondName];
+    };
     
-    self.privateFrameworks = [self frameworksAtPath:@"/System/Library/PrivateFrameworks"];
-    self.publicFrameworks = [self frameworksAtPath:@"/System/Library/Frameworks"];
+    self.privateFrameworks = [[self frameworksAtPath:@"/System/Library/PrivateFrameworks"] sortedArrayUsingComparator:sortComparator];
+    self.publicFrameworks = [[self frameworksAtPath:@"/System/Library/Frameworks"] sortedArrayUsingComparator:sortComparator];
 	
 	self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
 	self.definesPresentationContext = YES;
