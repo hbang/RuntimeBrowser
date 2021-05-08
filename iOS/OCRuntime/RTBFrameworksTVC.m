@@ -265,6 +265,11 @@ static const NSUInteger kPrivateFrameworks = 1;
 }
 
 - (NSArray *)frameworksAtPath:(NSString *)path {
+    NSString *dyldRoot = [NSProcessInfo processInfo].environment[@"DYLD_ROOT_PATH"];
+    if (dyldRoot != nil) {
+        path = [dyldRoot stringByAppendingPathComponent:path];
+    }
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSDirectoryEnumerator *directoryEnumerator = [fileManager enumeratorAtURL:[NSURL fileURLWithPath:path] includingPropertiesForKeys:@[] options:0 errorHandler:^BOOL(NSURL *url, NSError *error) {
