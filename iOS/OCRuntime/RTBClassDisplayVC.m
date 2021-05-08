@@ -12,7 +12,7 @@
 #import "NSString+SyntaxColoring.h"
 #import "RTBRuntimeHeader.h"
 
-@interface RTBClassDisplayVC ()
+@interface RTBClassDisplayVC () <UIDocumentPickerDelegate>
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) UIBarButtonItem *useButton;
@@ -30,6 +30,19 @@
     }];
 }
 
+- (void)save:(id)sender {
+    NSURL *url = [self tempFileURL];
+    [self.textView.attributedText.string writeToURL:url atomically:NO encoding:NSUTF8StringEncoding error:nil];
+
+    UIDocumentPickerViewController *viewController = [[UIDocumentPickerViewController alloc] initWithURL:url inMode:UIDocumentPickerModeExportToService];
+    [viewController setDelegate:self];
+    [[self navigationController] presentViewController:viewController animated:YES completion:nil];
+}
+
+- (NSURL *)tempFileURL {
+    return [[[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:_className ?: _protocolName] URLByAppendingPathExtension:@"h"];
+}
+
 - (void)dismissModalView:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -38,10 +51,24 @@
     [super viewDidLoad];
     
 	self.textView.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
-    
-    self.useButton = _className ? [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Use", nil) style:UIBarButtonItemStylePlain target:self action:@selector(use:)] : nil;
-    self.navigationItem.leftBarButtonItem = self.useButton;
+
+    if (_className != nil) {
+        self.useButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Use", nil) style:UIBarButtonItemStylePlain target:self action:@selector(use:)];
+        if (@available(iOS 13, *)) {
+            if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
+                self.useButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"lightbulb"] style:UIBarButtonItemStylePlain target:self action:@selector(use:)];
+            }
+        }
+    }
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissModalView:)];
+
+    NSMutableArray <UIBarButtonItem *> *items = [NSMutableArray array];
+    if (self.useButton != nil) {
+        [items addObject:self.useButton];
+    }
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(save:)]];
+    self.navigationItem.leftBarButtonItems = items;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +110,16 @@
     NSAttributedString *as = [header colorizeWithKeywords:keywords classes:nil colorize:YES];
     
     self.textView.attributedText = as;
+}
+
+#pragma mark - UIDocumentPickerDelegate
+
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
+    [[NSFileManager defaultManager] moveItemAtURL:[self tempFileURL] toURL:url error:nil];
+}
+
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller {
+    [[NSFileManager defaultManager] removeItemAtURL:[self tempFileURL] error:nil];
 }
 
 @end
