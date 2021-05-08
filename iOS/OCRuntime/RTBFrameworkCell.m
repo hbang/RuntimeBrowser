@@ -17,6 +17,13 @@
 
 - (void)setFrameworkName:(NSString *)frameworkName {
     self.label.text = frameworkName;
+
+    if (@available(iOS 13, *)) {
+        if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
+            self.frameworkImageView.contentMode = UIViewContentModeCenter;
+            [self.frameworkImageView setImage:[UIImage systemImageNamed:@"hammer.fill"]];
+        }
+    }
 }
 
 - (NSString *)frameworkName {

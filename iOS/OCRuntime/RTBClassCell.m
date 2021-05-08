@@ -17,6 +17,12 @@
 
 - (void)setClassName:(NSString *)s {
     _label.text = s;
+
+    if (@available(iOS 13, *)) {
+        if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
+            [self.button setImage:[UIImage systemImageNamed:@"doc.text.fill"] forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (NSString *)className {

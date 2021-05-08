@@ -20,6 +20,12 @@
     _label.text = [p protocolName];
     _label.font = [UIFont italicSystemFontOfSize:_label.font.pointSize];
     self.accessoryType = [p hasChildren] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+
+    if (@available(iOS 13, *)) {
+        if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
+            [self.button setImage:[UIImage systemImageNamed:@"arrow.up.right.diamond.fill"] forState:UIControlStateNormal];
+        }
+    }
 }
 
 - (IBAction)showHeaders:(id)sender {
