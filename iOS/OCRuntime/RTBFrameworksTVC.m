@@ -72,6 +72,17 @@ static const NSUInteger kPrivateFrameworks = 1;
     } else {
         b = [_filteredPrivateFrameworks objectAtIndex:indexPath.row];
     }
+
+    // Special case: iOS 12 moved UIKit to UIKitCore. UIKit just re-exports UIKitCore symbols.
+    // If that exists, load that instead.
+    if ([[[b bundleURL] lastPathComponent] isEqualToString:@"UIKit.framework"]) {
+        for (NSBundle *privateFramework in _filteredPrivateFrameworks) {
+            if ([[[privateFramework bundleURL] lastPathComponent] isEqualToString:@"UIKitCore.framework"]) {
+                b = privateFramework;
+                break;
+            }
+        }
+    }
     
     NSString *bundlePath = [b bundlePath];
     NSString *name = [[bundlePath lastPathComponent] stringByDeletingPathExtension];
