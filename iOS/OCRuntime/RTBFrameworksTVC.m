@@ -15,6 +15,12 @@
 static const NSUInteger kPublicFrameworks = 0;
 static const NSUInteger kPrivateFrameworks = 1;
 
+@interface UIAlertController (Private)
+
+@property (nonatomic, retain) UIViewController *contentViewController;
+
+@end
+
 @implementation RTBFrameworksTVC
 
 //- (IBAction)showInfo:(id)sender {
@@ -141,19 +147,34 @@ static const NSUInteger kPrivateFrameworks = 1;
 - (IBAction)loadAllFrameworks:(id)sender {
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Loading All Frameworks" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
+
+    self.progressView = [[UIProgressView alloc] init];
+    self.progressView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    alertController.contentViewController = [[UIViewController alloc] init];
+    [alertController.contentViewController.view addSubview:self.progressView];
+
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[progressView]-margin-|"
+                                                                                    options:kNilOptions
+                                                                                    metrics:@{
+                                                                                        @"margin": @20
+                                                                                    }
+                                                                                      views:@{
+                                                                                          @"progressView": self.progressView
+                                                                                      }]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[progressView(==height)]|"
+                                                                                    options:kNilOptions
+                                                                                    metrics:@{
+                                                                                        @"height": @3
+                                                                                    }
+                                                                                      views:@{
+                                                                                          @"progressView": self.progressView
+                                                                                      }]];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+
     __weak typeof(self) weakSelf = self;
-    
-    [self presentViewController:alertController animated:YES completion:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if(strongSelf == nil) return;
-        CGFloat margin = 8.0;
-        CGFloat progressHeight = 2;
-        strongSelf.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(margin, alertController.view.frame.size.height - progressHeight, alertController.view.frame.size.width - margin * 2.0 , progressHeight)];
-        strongSelf.progressView.progress = 0.0;
-        [alertController.view addSubview:strongSelf.progressView];
-    }];
-    
+
     NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
         
         __strong typeof(weakSelf) strongSelf = weakSelf;
