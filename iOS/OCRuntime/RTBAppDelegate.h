@@ -18,7 +18,7 @@
 @property (strong, nonatomic) RTBRuntime *allClasses;
 @property (strong, nonatomic) GCDWebServer *webServer;
 
-- (GCDWebServerResponse *)responseForPath:(NSString *)path;
+- (GCDWebServerResponse *)responseForPath:(NSString *)path isWget:(BOOL)isWget;
 - (NSString *)myIPAddress;
 - (UInt16)serverPort;
 

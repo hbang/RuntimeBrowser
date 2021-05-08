@@ -107,9 +107,10 @@
     
     NSArray *classes = [_allClasses sortedClassStubs];
     [ms appendFormat:@"%@ classes loaded\n\n", @([classes count])];
+    [ms appendString:@"<a href=\"..\">..</a>\n"];
     for(RTBClass *cs in classes) {
         //if([cs.stubClassname compare:@"S"] == NSOrderedAscending) continue;
-        [ms appendFormat:@"<A HREF=\"/classes/%@.h\">%@.h</A>\n", cs.classObjectName, cs.classObjectName];
+        [ms appendFormat:@"<a href=\"/classes/%@.h\">%@.h</a>\n", cs.classObjectName, cs.classObjectName];
     }
     
     NSString *html = [self htmlPageWithContents:ms title:@"iOS Runtime Browser - List View"];
@@ -122,8 +123,9 @@
     
     NSArray *protocols = [_allClasses sortedProtocolStubs];
     [ms appendFormat:@"%@ protocols loaded\n\n", @([protocols count])];
+    [ms appendString:@"<a href=\"..\">..</a>\n"];
     for(RTBProtocol *p in protocols) {
-        [ms appendFormat:@"<A HREF=\"/protocols/%@.h\">%@.h</A>\n", p.protocolName, p.protocolName];
+        [ms appendFormat:@"<a href=\"/protocols/%@.h\">%@.h</a>\n", p.protocolName, p.protocolName];
     }
     
     NSString *html = [self htmlPageWithContents:ms title:@"iOS Runtime Browser - Protocols"];
@@ -153,7 +155,15 @@
     return basePath;
 }
 
-- (GCDWebServerDataResponse *)responseForClassHeaderPath:(NSString *)headerPath {
+- (NSString *)htmlResponseForHeaderPath:(NSString *)headerPath contents:(NSString *)contents {
+    NSString *filePath = [headerPath hasPrefix:@"/tree/"] ? [headerPath substringFromIndex:@"/tree".length] : headerPath;
+    NSString *fileName = [headerPath lastPathComponent];
+    NSString *saveLink = @"<a href=\"?download\" download title=\"Download\" class=\"download\">&darr;</a>";
+    NSString *body = [NSString stringWithFormat:@"%@ %@\n\n\n%@", filePath, saveLink, contents];
+    return [self htmlPageWithContents:body title:fileName];
+}
+
+- (GCDWebServerDataResponse *)responseForClassHeaderPath:(NSString *)headerPath isWget:(BOOL)isWget {
     NSString *fileName = [headerPath lastPathComponent];
     NSString *className = [fileName stringByDeletingPathExtension];
     
@@ -164,18 +174,28 @@
         NSLog(@"-- [ERROR] empty header for path %@", headerPath);
         header = @"/* empty header */\n";
     }
-    
-    return [GCDWebServerDataResponse responseWithText:header];
+
+    if (isWget) {
+        return [GCDWebServerDataResponse responseWithText:header];
+    } else {
+        NSString *html = [self htmlResponseForHeaderPath:headerPath contents:header];
+        return [GCDWebServerDataResponse responseWithHTML:html];
+    }
 }
 
-- (GCDWebServerDataResponse *)responseForProtocolHeaderPath:(NSString *)headerPath {
+- (GCDWebServerDataResponse *)responseForProtocolHeaderPath:(NSString *)headerPath isWget:(BOOL)isWget {
     NSString *fileName = [headerPath lastPathComponent];
     NSString *protocolName = [fileName stringByDeletingPathExtension];
     
     RTBProtocol *p = [RTBProtocol protocolStubWithProtocolName:protocolName];
     NSString *header = [RTBRuntimeHeader headerForProtocol:p];
-    
-    return [GCDWebServerDataResponse responseWithText:header];
+
+    if (isWget) {
+        return [GCDWebServerDataResponse responseWithText:header];
+    } else {
+        NSString *html = [self htmlResponseForHeaderPath:headerPath contents:header];
+        return [GCDWebServerDataResponse responseWithHTML:html];
+    }
 }
 
 - (GCDWebServerDataResponse *)responseForTreeWithFrameworksName:(NSString *)name directory:(NSString *)dir {
@@ -203,9 +223,10 @@
     NSArray *sortedDylibs = [classes sortedArrayUsingComparator:^NSComparisonResult(NSString *s1, NSString *s2) {
         return [s1 compare:s2];
     }];
-    
+
+    [ms appendString:@"<a href=\"..\">..</a>\n"];
     for(NSString *s in sortedDylibs) {
-        [ms appendFormat:@"<A HREF=\"/tree%@/%@.h\">%@.h</A>\n", name, s, s];
+        [ms appendFormat:@"<a href=\"/tree%@%@.h\">%@.h</a>\n", name, s, s];
     }
     
     NSString *html = [self htmlPageWithContents:ms title:[name lastPathComponent]];
@@ -232,13 +253,14 @@
     
     NSMutableString *ms = [NSMutableString string];
     [ms appendFormat:@"%@\n%@ dylibs\n\n", name, @([classes count])];
+    [ms appendString:@"<a href=\"..\">..</a>\n"];
     
     NSArray *sortedDylibs = [classes sortedArrayUsingComparator:^NSComparisonResult(NSString *s1, NSString *s2) {
         return [s1 compare:s2];
     }];
-    
+
     for(NSString *s in sortedDylibs) {
-        [ms appendFormat:@"<A HREF=\"/tree%@/%@.h\">%@.h</A>\n", name, s, s];
+        [ms appendFormat:@"<a href=\"/tree%@%@.h\">%@.h</a>\n", name, s, s];
     }
     
     NSString *html = [self htmlPageWithContents:ms title:[name lastPathComponent]];
@@ -295,9 +317,10 @@
         [files sortUsingSelector:@selector(compare:)];
         
         [ms appendFormat:@"%@\n%@ frameworks loaded\n\n", path, @([files count])];
+        [ms appendString:@"<a href=\"..\">..</a>\n"];
         
         for(NSString *fileName in files) {
-            [ms appendFormat:@"<a href=\"/tree%@%@\">%@/</a>\n", path, fileName, fileName];
+            [ms appendFormat:@"<a href=\"/tree%@%@/\">%@/</a>\n", path, fileName, fileName];
         }
         
     } else if([path isEqualToString:@"/lib/"]) {
@@ -312,9 +335,10 @@
         [files sortUsingSelector:@selector(compare:)];
         
         [ms appendFormat:@"%@\n%@ dylibs\n\n", path, @([files count])];
+        [ms appendString:@"<a href=\"..\">..</a>\n"];
         
         for(NSString *fileName in files) {
-            [ms appendFormat:@"<a href=\"/tree%@%@\">%@/</a>\n", path, fileName, fileName];
+            [ms appendFormat:@"<a href=\"/tree%@%@/\">%@/</a>\n", path, fileName, fileName];
         }
     } else if([path isEqualToString:@"/protocols/"]) {
         
@@ -326,6 +350,7 @@
         }];
         
         [ms appendFormat:@"%@\n%@ protocols\n\n", path, @([files count])];
+        [ms appendString:@"<a href=\"..\">..</a>\n"];
         
         for(NSString *fileName in files) {
             [ms appendFormat:@"<a href=\"/tree%@%@.h\">%@.h</a>\n", path, fileName, fileName];
@@ -351,16 +376,16 @@
     return [@[header, contents, [self htmlFooter]] componentsJoinedByString:@"\n"];
 }
 
-- (GCDWebServerResponse *)responseForPath:(NSString *)path {
+- (GCDWebServerResponse *)responseForPath:(NSString *)path isWget:(BOOL)isWget {
     
     BOOL isProtocol = [path hasPrefix:@"/protocols/"] || [path hasPrefix:@"/tree/protocols/"];
     BOOL isHeaderFile = [path hasSuffix:@".h"];
     
     if(isHeaderFile) {
         if(isProtocol) {
-            return [self responseForProtocolHeaderPath:path];
+            return [self responseForProtocolHeaderPath:path isWget:isWget];
         } else {
-            return [self responseForClassHeaderPath:path];
+            return [self responseForClassHeaderPath:path isWget:isWget];
         }
     }
     
@@ -411,8 +436,10 @@
                                       if(strongSelf == nil) return nil;
                                       
                                       //NSLog(@"-- %@ %@", request.method, request.path);
-                                      
-                                      return [strongSelf responseForPath:request.path];
+
+                                      NSString *userAgent = [request headers][@"User-Agent"];
+                                      BOOL isWget = userAgent == nil || [userAgent containsString:@"wget/"] || [userAgent containsString:@"curl/"] || [[request.URL query] isEqualToString:@"download"];
+                                      return [strongSelf responseForPath:request.path isWget:isWget];
                                       
                                   }];
         
