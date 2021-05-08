@@ -31,11 +31,16 @@ static NSArray *cachedKeywords = nil;
     NSString *selectorString = [method selectorString];
     
     if ([selectorString isEqualToString:@"alloc"] || [selectorString isEqualToString:@"init"]) {
-        self.textLabel.textColor = [UIColor blueColor];
+        self.textLabel.textColor = [UIColor systemBlueColor];
     } else if ([returnType isEqualToString:@"void"]  && !hasArguments && ([selectorString isEqualToString:@".cxx_destruct"] || [selectorString isEqualToString:@"dealloc"])) {
-        self.textLabel.textColor = [UIColor orangeColor];
+        self.textLabel.textColor = [UIColor systemOrangeColor];
     } else {
         self.textLabel.textColor = [UIColor blackColor];
+        if (@available(iOS 13, *)) {
+            if ([UIColor respondsToSelector:@selector(labelColor)]) {
+                self.textLabel.textColor = [UIColor labelColor];
+            }
+        }
     }
     
     if(cachedKeywords == nil) {

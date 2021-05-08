@@ -58,12 +58,29 @@ char **stringArrayFromNSArray(NSArray *a) {
 - (NSAttributedString *)colorizeWithKeywords:(NSArray *)keywords classes:(NSArray *)classes colorize:(BOOL)colorize {
     
 #if TARGET_OS_IPHONE
-    UIFont *font = [UIFont fontWithName:@"Courier" size:12.0];
+    UIFont *font;
+    if (@available(iOS 13, *)) {
+        if ([UIFont respondsToSelector:@selector(monospacedSystemFontOfSize:weight:)]) {
+            font = [UIFont monospacedSystemFontOfSize:12.0 weight:UIFontWeightRegular];
+        } else {
+            font = [UIFont fontWithName:@"Menlo" size:12.0];
+        }
+    }
 #else
-    NSFont *font = [NSFont fontWithName:@"Courier" size:12.0];
+    NSFont *font = [NSFont fontWithName:@"Menlo" size:12.0];
 #endif
+
+    UIColor *foregroundColor = [UIColor blackColor];
+    if (@available(iOS 13, *)) {
+        if ([UIColor respondsToSelector:@selector(labelColor)]) {
+            foregroundColor = [UIColor labelColor];
+        }
+    }
     
-    NSDictionary *attributes = @{ NSFontAttributeName : font };
+    NSDictionary *attributes = @{
+        NSFontAttributeName: font,
+        NSForegroundColorAttributeName: foregroundColor
+    };
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self attributes:attributes];
     
@@ -79,9 +96,9 @@ char **stringArrayFromNSArray(NSArray *a) {
     char *tmp = (char *)text;
     
 #if TARGET_OS_IPHONE
-    UIColor *commentsColor = [UIColor colorWithRed:0.0 green:119.0/255 blue:0.0 alpha:1.0];
-    UIColor *keywordsColor = [UIColor colorWithRed:193.0/255 green:0.0 blue:145./255 alpha:1.0];
-    UIColor *classesColor = [UIColor colorWithRed:103.0/255 green:31.0/255 blue:155./255 alpha:1.0];
+    UIColor *commentsColor = [UIColor systemGreenColor];
+    UIColor *keywordsColor = [UIColor systemPinkColor];
+    UIColor *classesColor = [UIColor systemPurpleColor];
 #else
     NSColor *commentsColor = [NSColor colorWithCalibratedRed:0.0 green:119.0/255 blue:0.0 alpha:1.0];
     NSColor *keywordsColor = [NSColor colorWithCalibratedRed:193.0/255 green:0.0 blue:145./255 alpha:1.0];

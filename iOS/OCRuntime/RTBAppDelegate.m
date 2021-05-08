@@ -442,8 +442,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.window.tintColor = [UIColor purpleColor];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.tintColor = [UIColor systemPurpleColor];
+    [UISwitch appearance].onTintColor = self.window.tintColor;
+
+    if (@available(iOS 13, *)) {
+        if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
+            UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
+            NSArray <UITabBarItem *> *items = tabBarController.tabBar.items;
+            items[0].image = [[UIImage systemImageNamed:@"hammer.fill"] imageWithoutBaseline];
+            items[1].image = [[UIImage systemImageNamed:@"folder.fill"] imageWithoutBaseline];
+            items[2].image = [[UIImage systemImageNamed:@"doc.text.fill"] imageWithoutBaseline];
+            items[3].image = [[UIImage systemImageNamed:@"arrow.up.right.diamond.fill"] imageWithoutBaseline];
+            items[4].image = [[UIImage systemImageNamed:@"info.circle.fill"] imageWithoutBaseline];
+        }
+    }
     
     NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"Defaults" ofType:@"plist"];
     NSDictionary *defaults = [NSDictionary dictionaryWithContentsOfFile:defaultsPath];
@@ -473,9 +485,7 @@
     classDisplayVC.className = className;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:classDisplayVC];
-    navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
-    self.window.rootViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.window.rootViewController presentViewController:navigationController animated:YES completion:nil];
 }
 
@@ -486,7 +496,6 @@
     classDisplayVC.protocolName = [protocol protocolName];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:classDisplayVC];
-    navigationController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
     self.window.rootViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self.window.rootViewController presentViewController:navigationController animated:YES completion:nil];
