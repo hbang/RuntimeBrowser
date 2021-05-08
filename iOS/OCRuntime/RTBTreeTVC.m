@@ -80,9 +80,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 	RTBClass *cs = [_classStubs objectAtIndex:indexPath.row];
 	
-	if([[cs subclassesStubs] count] == 0) return;
+	if([[cs subclassesStubs] count] == 0) {
+        RTBClassCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell showHeaders:self];
+        return;
+    }
 	
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     RTBTreeTVC *tvc = (RTBTreeTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBTreeTVC"];

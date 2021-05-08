@@ -126,7 +126,11 @@
     
     NSArray *children = [p children];
     
-    if([children count] == 0) return;
+    if([children count] == 0) {
+        RTBProtocolCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell showHeaders:self];
+        return;
+    }
 
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     RTBListTVC *listTVC = (RTBListTVC *)[sb instantiateViewControllerWithIdentifier:@"RTBListTVC"];

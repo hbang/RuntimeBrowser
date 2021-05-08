@@ -90,15 +90,9 @@
     if(_classStubs == nil) {
         self.classStubs = [[RTBRuntime sharedInstance] sortedClassStubs];
     }
-    
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
     [self setupIndexedClassStubs];
     
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,6 +133,12 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    RTBClassCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell showHeaders:self];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
