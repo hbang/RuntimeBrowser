@@ -7,6 +7,7 @@
 //
 
 #import "RTBProtocolCell.h"
+#import "RTBClassDisplayVC.h"
 
 @interface RTBProtocolCell ()
 @property (nonatomic, retain) IBOutlet UILabel *label;
@@ -19,7 +20,7 @@
     _protocolObject = p;
     _label.text = [p protocolName];
     _label.font = [UIFont italicSystemFontOfSize:_label.font.pointSize];
-    self.accessoryType = [p hasChildren] ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
+    self.accessoryType = [p hasChildren] ? UITableViewCellAccessoryDetailDisclosureButton : UITableViewCellAccessoryNone;
 
     if (@available(iOS 13, *)) {
         if ([UIImage respondsToSelector:@selector(systemImageNamed:)]) {
@@ -29,13 +30,22 @@
 }
 
 - (IBAction)showHeaders:(id)sender {
-    // TODO: use a notification here
-	id appDelegate = [[UIApplication sharedApplication] delegate];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-	[appDelegate performSelector:@selector(showHeaderForProtocol:) withObject:_protocolObject];
-#pragma clang diagnostic pop
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    RTBClassDisplayVC *classDisplayVC = (RTBClassDisplayVC *)[sb instantiateViewControllerWithIdentifier:@"RTBClassDisplayVC"];
+    classDisplayVC.protocolName = [_protocolObject protocolName];
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:classDisplayVC];
+
+    UISplitViewController *splitViewController = [self splitViewController];
+    [splitViewController showDetailViewController:navigationController sender:self];
+}
+
+- (UISplitViewController *)splitViewController {
+    UIResponder *responder = self;
+    while (![responder isKindOfClass:UIViewController.class]) {
+        responder = [responder nextResponder];
+    }
+    return [(UIViewController *)responder splitViewController];
 }
 
 @end

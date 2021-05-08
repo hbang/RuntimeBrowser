@@ -7,6 +7,7 @@
 //
 
 #import "RTBClassCell.h"
+#import "RTBClassDisplayVC.h"
 
 @interface RTBClassCell ()
 @property (nonatomic, retain) IBOutlet UILabel *label;
@@ -30,13 +31,22 @@
 }
 
 - (IBAction)showHeaders:(id)sender {
-    // TODO: use a notification here
-	id appDelegate = [[UIApplication sharedApplication] delegate];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-	[appDelegate performSelector:@selector(showHeaderForClassName:) withObject:_label.text];
-#pragma clang diagnostic pop
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    RTBClassDisplayVC *classDisplayVC = (RTBClassDisplayVC *)[sb instantiateViewControllerWithIdentifier:@"RTBClassDisplayVC"];
+    classDisplayVC.className = _label.text;
+
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:classDisplayVC];
+
+    UISplitViewController *splitViewController = [self splitViewController];
+    [splitViewController showDetailViewController:navigationController sender:self];
+}
+
+- (UISplitViewController *)splitViewController {
+    UIResponder *responder = self;
+    while (![responder isKindOfClass:UIViewController.class]) {
+        responder = [responder nextResponder];
+    }
+    return [(UIViewController *)responder splitViewController];
 }
 
 @end

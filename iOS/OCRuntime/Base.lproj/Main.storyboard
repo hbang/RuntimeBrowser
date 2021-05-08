@@ -59,13 +59,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gXf-od-6m8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="-1528"/>
+            <point key="canvasLocation" x="3213" y="-1546"/>
         </scene>
-        <!--Tree-->
+        <!--Navigation Controller-->
         <scene sceneID="p8R-X1-kLy">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0d-sF-tJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" id="un5-CG-cW7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Tree" image="tree.png" id="xms-dm-0WI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9bQ-O4-zMv">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -74,9 +74,8 @@
                         <segue destination="n3F-n0-wux" kind="relationship" relationship="rootViewController" id="wYi-uk-zEj"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h0d-sF-tJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="-1528"/>
+            <point key="canvasLocation" x="2448" y="-1546"/>
         </scene>
         <!--List-->
         <scene sceneID="lsm-6Y-h4a">
@@ -137,7 +136,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JSi-79-KZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668" y="-847"/>
+            <point key="canvasLocation" x="3213" y="-858"/>
         </scene>
         <!--List-->
         <scene sceneID="nMX-sH-6tP">
@@ -157,7 +156,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E4Z-HG-0bp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="-846"/>
+            <point key="canvasLocation" x="2449" y="-857"/>
         </scene>
         <!--Frameworks-->
         <scene sceneID="NB4-c2-OS5">
@@ -205,7 +204,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRe-sF-XHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1668.1159420289857" y="-182.14285714285714"/>
+            <point key="canvasLocation" x="3214" y="-193"/>
         </scene>
         <!--InfoVC-->
         <scene sceneID="IdE-Sy-MN4">
@@ -340,7 +339,7 @@ We have found this to be a useful development tool. Please note, however, that e
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GoX-AL-SwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1666.6666666666667" y="1218.75"/>
+            <point key="canvasLocation" x="1668" y="1219"/>
         </scene>
         <!--ObjectsTVC-->
         <scene sceneID="oco-JZ-uVg">
@@ -398,16 +397,30 @@ We have found this to be a useful development tool. Please note, however, that e
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a file to view its header here." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2h-wM-VUs">
+                                <rect key="frame" x="40" y="439.5" width="334" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="y2h-wM-VUs" firstAttribute="leading" secondItem="LLs-BJ-6AZ" secondAttribute="leadingMargin" constant="20" id="4l2-BS-AV5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="y2h-wM-VUs" secondAttribute="trailing" constant="20" id="IuU-ml-ZUt"/>
+                            <constraint firstItem="y2h-wM-VUs" firstAttribute="centerY" secondItem="LLs-BJ-6AZ" secondAttribute="centerY" id="c6s-dW-I60"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dt8-K5-uBa"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="placeholderLabel" destination="y2h-wM-VUs" id="gKJ-0G-zSI"/>
                         <outlet property="textView" destination="3pQ-uc-XSb" id="gVb-2f-vWB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KwM-Fl-Gcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-278" y="1219"/>
+            <point key="canvasLocation" x="-110" y="1219"/>
         </scene>
         <!--Use-->
         <scene sceneID="HJX-hS-Awe">
@@ -442,7 +455,7 @@ We have found this to be a useful development tool. Please note, however, that e
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmZ-ez-0Jb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="526"/>
+            <point key="canvasLocation" x="2449" y="515"/>
         </scene>
         <!--About-->
         <scene sceneID="gxl-1z-eyp">
@@ -459,7 +472,7 @@ We have found this to be a useful development tool. Please note, however, that e
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qx5-Dt-De3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="903" y="1219"/>
+            <point key="canvasLocation" x="904" y="1219"/>
         </scene>
         <!--Frameworks-->
         <scene sceneID="XwN-TN-vUV">
@@ -476,7 +489,7 @@ We have found this to be a useful development tool. Please note, however, that e
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qie-aE-9pL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902.89855072463774" y="-171.42857142857142"/>
+            <point key="canvasLocation" x="2449" y="-182"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -490,10 +503,10 @@ We have found this to be a useful development tool. Please note, however, that e
                         <color key="selectedImageTintColor" systemColor="systemPurpleColor"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ufp-Rs-FH7" kind="relationship" relationship="viewControllers" id="659-D0-Ijy"/>
-                        <segue destination="un5-CG-cW7" kind="relationship" relationship="viewControllers" id="bNq-zE-Op2"/>
-                        <segue destination="LuA-Pz-xFy" kind="relationship" relationship="viewControllers" id="LZo-d8-eBi"/>
-                        <segue destination="1dm-Wz-Ugo" kind="relationship" relationship="viewControllers" id="dHO-tb-uHt"/>
+                        <segue destination="XWu-UQ-zjK" kind="relationship" relationship="viewControllers" id="LB4-yd-pU3"/>
+                        <segue destination="qus-N7-5NS" kind="relationship" relationship="viewControllers" id="wSx-ks-kZG"/>
+                        <segue destination="kdb-SB-SGi" kind="relationship" relationship="viewControllers" id="Qip-p0-yJF"/>
+                        <segue destination="QKH-6d-cPg" kind="relationship" relationship="viewControllers" id="SQO-4i-PXE"/>
                         <segue destination="KYm-sc-KDE" kind="relationship" relationship="viewControllers" id="4Pl-en-bh3"/>
                     </connections>
                 </tabBarController>
@@ -564,9 +577,222 @@ We have found this to be a useful development tool. Please note, however, that e
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DRW-n3-KfO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1667" y="526"/>
+            <point key="canvasLocation" x="3213" y="515"/>
+        </scene>
+        <!--Tree-->
+        <scene sceneID="YWw-CO-Unv">
+            <objects>
+                <viewController id="qus-N7-5NS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uEn-9C-9dg"/>
+                        <viewControllerLayoutGuide type="bottom" id="ecx-Rl-NsF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WIw-51-KFC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OgK-qz-Lpd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="XQV-VB-m5V" kind="embed" id="wnK-Mx-FhG"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="OgK-qz-Lpd" secondAttribute="bottom" id="8RC-8G-uri"/>
+                            <constraint firstItem="OgK-qz-Lpd" firstAttribute="top" secondItem="WIw-51-KFC" secondAttribute="top" id="Yum-OY-05H"/>
+                            <constraint firstItem="OgK-qz-Lpd" firstAttribute="leading" secondItem="WIw-51-KFC" secondAttribute="leading" id="qso-fM-X3P"/>
+                            <constraint firstAttribute="trailing" secondItem="OgK-qz-Lpd" secondAttribute="trailing" id="rO0-Pg-bij"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Tree" image="tree.png" id="E1d-Nc-uU9"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kr8-eP-KHD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="-1546"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="25d-fV-H26">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zld-GZ-Vkm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" behavior="tile" id="XQV-VB-m5V" customClass="RTBSplitViewController" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="un5-CG-cW7" kind="relationship" relationship="masterViewController" id="APj-ZJ-5vd"/>
+                        <segue destination="Kwb-2G-1fD" kind="relationship" relationship="detailViewController" id="qeo-KJ-FCR"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="1684" y="-1546"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="W1L-bE-KXM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kwb-2G-1fD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bj7-wr-whl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3f0-gh-i7s" kind="relationship" relationship="rootViewController" id="q0W-O2-LNs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cWs-Z8-xME" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1020" y="1219"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="ORd-5M-RT9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L7i-Hd-Ijw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" behavior="tile" id="GEQ-vc-f6j" customClass="RTBSplitViewController" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="LuA-Pz-xFy" kind="relationship" relationship="masterViewController" id="4nI-Rw-8jo"/>
+                        <segue destination="Kwb-2G-1fD" kind="relationship" relationship="detailViewController" id="Tvj-LF-Zmw"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="1683" y="-857"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="BMn-mQ-u6P">
+            <objects>
+                <viewController id="kdb-SB-SGi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PHR-Vu-ct6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rrs-aM-uhY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7bS-wH-b4s">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNS-Ef-l3M">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="GEQ-vc-f6j" kind="embed" id="R5V-65-B05"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="QNS-Ef-l3M" secondAttribute="bottom" id="3hc-Sn-mGF"/>
+                            <constraint firstItem="QNS-Ef-l3M" firstAttribute="leading" secondItem="7bS-wH-b4s" secondAttribute="leading" id="JKs-4C-wkm"/>
+                            <constraint firstItem="QNS-Ef-l3M" firstAttribute="top" secondItem="7bS-wH-b4s" secondAttribute="top" id="qL2-9I-MDB"/>
+                            <constraint firstAttribute="trailing" secondItem="QNS-Ef-l3M" secondAttribute="trailing" id="slS-Uw-RDm"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="List" image="list.png" id="GE4-2K-O5n"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3eK-Y3-Sf0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="-857"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="cat-UD-iNg">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p1J-5t-1Gf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" behavior="tile" id="f0m-7m-isR" customClass="RTBSplitViewController" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="ufp-Rs-FH7" kind="relationship" relationship="masterViewController" id="m9w-93-cbt"/>
+                        <segue destination="Kwb-2G-1fD" kind="relationship" relationship="detailViewController" id="xTZ-nI-HdK"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="1683" y="-182"/>
+        </scene>
+        <!--Frameworks-->
+        <scene sceneID="c18-mz-aqa">
+            <objects>
+                <viewController id="XWu-UQ-zjK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CyS-dQ-uY7"/>
+                        <viewControllerLayoutGuide type="bottom" id="C7y-Uh-OYK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2ol-DU-OY6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLw-SC-QDA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="f0m-7m-isR" kind="embed" id="daY-Ds-kd4"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WLw-SC-QDA" firstAttribute="top" secondItem="2ol-DU-OY6" secondAttribute="top" id="1wY-A8-3Dy"/>
+                            <constraint firstAttribute="trailing" secondItem="WLw-SC-QDA" secondAttribute="trailing" id="NNQ-VF-x4o"/>
+                            <constraint firstItem="WLw-SC-QDA" firstAttribute="leading" secondItem="2ol-DU-OY6" secondAttribute="leading" id="OrH-dy-fmp"/>
+                            <constraint firstAttribute="bottom" secondItem="WLw-SC-QDA" secondAttribute="bottom" id="mn0-o0-e7z"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Frameworks" image="frameworks.png" id="8zZ-X5-zwy"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fwb-Z3-PXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="-182"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="cee-Rz-dwL">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gs2-tn-LyY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <splitViewController allowDoubleColumnStyle="YES" preferredDisplayMode="twoBeside" id="GsF-Nw-95n" customClass="RTBSplitViewController" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="1dm-Wz-Ugo" kind="relationship" relationship="masterViewController" id="ctt-RR-1ZS"/>
+                        <segue destination="Kwb-2G-1fD" kind="relationship" relationship="detailViewController" id="mhX-hF-Pzr"/>
+                    </connections>
+                </splitViewController>
+            </objects>
+            <point key="canvasLocation" x="1683" y="515"/>
+        </scene>
+        <!--Protocols-->
+        <scene sceneID="dKO-Tu-gR7">
+            <objects>
+                <viewController id="QKH-6d-cPg" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ysY-ET-KBE"/>
+                        <viewControllerLayoutGuide type="bottom" id="I5N-nt-Gge"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CXL-iH-eXO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTU-Gq-2Gs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <segue destination="GsF-Nw-95n" kind="embed" id="S18-vk-n5r"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dTU-Gq-2Gs" firstAttribute="top" secondItem="CXL-iH-eXO" secondAttribute="top" id="VBy-jx-yti"/>
+                            <constraint firstAttribute="trailing" secondItem="dTU-Gq-2Gs" secondAttribute="trailing" id="Xog-ok-VIE"/>
+                            <constraint firstAttribute="bottom" secondItem="dTU-Gq-2Gs" secondAttribute="bottom" id="lqr-qM-zRh"/>
+                            <constraint firstItem="dTU-Gq-2Gs" firstAttribute="leading" secondItem="CXL-iH-eXO" secondAttribute="leading" id="zrT-MH-ap9"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Protocols" image="use.png" id="etd-IH-F26"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dr2-5k-gTz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="903" y="515"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="qeo-KJ-FCR"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemPurpleColor"/>
     <resources>
         <image name="framework.png" width="48" height="48"/>
@@ -578,6 +804,9 @@ We have found this to be a useful development tool. Please note, however, that e
         <image name="use.png" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -80,8 +80,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
 	RTBClass *cs = [_classStubs objectAtIndex:indexPath.row];
 	
 	if([[cs subclassesStubs] count] == 0) {
