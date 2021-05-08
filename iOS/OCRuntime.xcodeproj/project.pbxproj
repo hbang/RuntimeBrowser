@@ -300,7 +300,11 @@
 				03959DD0176AFC4D002A1FCC /* Frameworks */,
 				03959DCF176AFC4D002A1FCC /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
+			wrapsLines = 1;
 		};
 		03959DCF176AFC4D002A1FCC /* Products */ = {
 			isa = PBXGroup;
@@ -426,7 +430,7 @@
 				ORGANIZATIONNAME = "Nicolas Seriot";
 				TargetAttributes = {
 					03959DCD176AFC4D002A1FCC = {
-						DevelopmentTeam = VBYRKYS73S;
+						DevelopmentTeam = N2LN9ZT493;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -644,7 +648,7 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VBYRKYS73S;
+				DEVELOPMENT_TEAM = N2LN9ZT493;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCRuntime/OCRuntime-Prefix.pch";
 				INFOPLIST_FILE = "OCRuntime/OCRuntime-Info.plist";
@@ -666,7 +670,7 @@
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = VBYRKYS73S;
+				DEVELOPMENT_TEAM = N2LN9ZT493;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCRuntime/OCRuntime-Prefix.pch";
 				INFOPLIST_FILE = "OCRuntime/OCRuntime-Info.plist";
