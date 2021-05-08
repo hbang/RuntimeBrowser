@@ -179,6 +179,7 @@ static const NSUInteger kPrivateFrameworks = 1;
                                         @"/System/Library/PrivateFrameworks/PowerlogFullOperators.framework",
                                         @"/System/Library/PrivateFrameworks/PowerlogAccounting.framework",
                                         @"/System/Library/PrivateFrameworks/Accessibility.framework/Frameworks/AXSpringBoardServerInstance.framework", // It will stuck
+#if !THEOS
                                         @"/System/Library/PrivateFrameworks/AppPredictionUI.framework",
                                         @"/System/Library/PrivateFrameworks/AssistantSettingsSupport.framework",
                                         @"/System/Library/PrivateFrameworks/CarPlaySupport.framework",
@@ -195,6 +196,7 @@ static const NSUInteger kPrivateFrameworks = 1;
                                         @"/System/Library/PrivateFrameworks/SpringBoardUI.framework",
                                         @"/System/Library/PrivateFrameworks/UserNotificationsUIKit.framework",
                                         @"/System/Library/PrivateFrameworks/VoiceShortcutsUI.framework",//ios 13.3
+#endif
                                         nil];
                 }
                 if ([skipedFrameworks containsObject:bundlePath]) {
