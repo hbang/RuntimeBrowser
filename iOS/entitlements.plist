@@ -8,6 +8,10 @@
 	<true/>
 	<key>com.apple.private.security.no-container</key>
 	<true/>
+	<key>com.apple.security.system-groups</key>
+	<array>
+		<string>systemgroup.com.apple.powerlog</string>
+	</array>
 	<key>com.apple.springboard-ui.client</key>
 	<true/>
 </dict>
